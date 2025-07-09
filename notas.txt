@@ -1,0 +1,19 @@
+Desafio 1:
+
+Criar um Sistema Bancário que permita realizar as seguintes operações:
+
+1 - Depósito:
+Depositar valores positivos
+Usuário único
+Devem ser armazenados em uma variável e exibidos no extrato
+
+2 - Saque:
+Limite de 500 por saque
+Limite de 3 saques diários
+Caso não tenha saldo, exibir mensagem de erro
+Devem ser armazenados em uma variável e exibidos no extrato
+
+3 - Extrato:
+Deve listar todos os depósitos e saques realizados
+Ao final do extrato, exibir o saldo atual
+Formatação: R$ xxxx.xx
