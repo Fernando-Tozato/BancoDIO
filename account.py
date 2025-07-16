@@ -25,7 +25,7 @@ class Account:
         self.deposits.append((datetime.now(), amount))
 
 
-    def withdraw(self, amount: float):
+    def withdrawal(self, amount: float):
         if amount <= 0:
             raise ValueError("Withdrawal amount must be positive")
 
@@ -35,11 +35,12 @@ class Account:
         if amount > self.balance:
             raise ValueError("Insufficient funds")
 
-        if self.withdraws[-1][0].date() == datetime.now().date():
-            if self.withdrawCount >= 3:
-                raise ValueError("Withdrawal limit exceeded for today")
-        else:
-            self.withdrawCount = 0
+        if len(self.withdraws) != 0:
+            if self.withdraws[-1][0].date() == datetime.now().date():
+                if self.withdrawCount >= 3:
+                    raise ValueError("Withdrawal limit exceeded for today")
+            else:
+                self.withdrawCount = 0
 
         self.balance -= amount
         self.withdrawCount += 1
@@ -56,8 +57,7 @@ class Account:
                 statement += f"\n{date.strftime('%m/%d/%Y')}\n"
                 lastDate = date
 
-            amount = str(amount)
-            statement += f"{date.time()} | {amount[0]}R${abs(float(amount)):.2f}\n"
+            statement += f"{date.time()} | {'-' if amount < 0 else ' '}R${abs(amount):.2f}\n"
 
         statement += f"\nBalance: R${self.balance:.2f}\n"
         return statement
