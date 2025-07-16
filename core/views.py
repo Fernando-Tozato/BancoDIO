@@ -132,6 +132,7 @@ def make_statement(request, account_number):
                 'type': operation.get_type_display(),
                 'way': operation.get_way_display(),
                 'amount': f'R${float(operation.amount):.2f}',
+                'balance': f'R${float(account.balance):.2f}',
             }
             if operation.from_account != account and operation.from_account is not None:
                 operation_data['from_account'] = operation.from_account.account_number
