@@ -3,7 +3,6 @@ import json
 from django.db.models import Q
 from django.db.models.functions import TruncDate
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from core.functions import can_make_withdrawal

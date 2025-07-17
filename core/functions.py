@@ -1,7 +1,6 @@
 from datetime import datetime
 
-from account import Account
-from core.models import Withdrawal
+from core.models import Withdrawal, Account
 
 
 def can_make_withdrawal(account: Account) -> bool:

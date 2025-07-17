@@ -27,6 +27,7 @@ Este projeto expõe uma API RESTful para operações bancárias básicas:
 
 * **Depósito** em conta existente
 * **Saque** com validação de limite diário
+* **Transferência** entre contas diferentes
 * **Consulta de detalhes** da conta
 * **Extrato** de operações
 
@@ -36,7 +37,7 @@ Todas as interações ocorrem via requisições HTTP e respostas em JSON.
 
 * Python 3.8+
 * pip
-* Django 4.x
+* Django 5.x
 
 ## Instalação
 
@@ -76,20 +77,39 @@ A API ficará disponível em `http://127.0.0.1:8000/`.
 
 ## Endpoints
 
-| Método | URL                              | Descrição                                     |
-| ------ | -------------------------------- | --------------------------------------------- |
-| POST   | `/core/accounts/deposit/`        | Realiza depósito na conta especificada        |
-| POST   | `/core/accounts/withdraw/`       | Realiza saque, valida limite diário de saques |
-| GET    | `/core/accounts/<id>/`           | Retorna detalhes da conta                     |
-| GET    | `/core/accounts/<id>/statement/` | Retorna extrato (histórico de operações)      |
+| Método | URL                                 | Descrição                                               |
+| ------ |-------------------------------------|---------------------------------------------------------|
+| POST   | `/core/deposit/`                    | Realiza depósito na conta especificada                  |
+| POST   | `/core/withdraw/`                   | Realiza saque, valida limite diário de saques           |
+| POST   | `/core/transfer/`                   | Realiza transferência, valida se as duas contas existem |
+| GET    | `/core/statement/<account_number>/` | Retorna extrato (histórico de operações)                |
+| GET    | `/core/accounts/`                   | Retorna detalhes de todas as contas                     |
+| GET    | `/core/account/<account_number>/`   | Retorna detalhes de todas as contas                     |
+
 
 ### Payload (JSON)
 
-Para depósito e saque:
-
+Depósito:
 ```json
 {
-  "account_id": 1,
+  "to_account": 1,
+  "amount": 150.00
+}
+```
+\
+Saque:
+```json
+{
+  "from_account": 1,
+  "amount": 150.00
+}
+```
+\
+Transferência:
+```json
+{
+  "from_account": 1,
+  "to_account": 2,
   "amount": 150.00
 }
 ```
@@ -121,20 +141,12 @@ Views baseadas em função que:
 
 ## Desafio
 
-O enunciado original encontra-se em \[19 - \[Dio] Desafio.pdf]\(./"19 - \[Dio] Desafio.pdf"). Embora o escopo fosse iniciante, foi implementada validação de limite diário de saque adicional.
+O enunciado original encontra-se em [Desafio DIO.pdf](./"Desafio%20DIO.pdf").
 
 ## Dependências
 
-* Django>=4.0,<5.0
-
-## Contribuição
-
-1. Faça um fork deste repositório.
-2. Crie uma branch para sua feature: `git checkout -b feature/nova-funcionalidade`
-3. Commit suas alterações: `git commit -m "Adiciona nova funcionalidade"`
-4. Envie para o repositório remoto: `git push origin feature/nova-funcionalidade`
-5. Abra um Pull Request.
+* Django>=5.0
 
 ## Licença
 
-Este projeto está licenciado sob a **MIT License**.
+Este projeto está licenciado sob a [**MIT License**](./LICENSE).
