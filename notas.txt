@@ -4,7 +4,6 @@ Criar um Sistema Bancário que permita realizar as seguintes operações:
 
 1 - Depósito:
 Depositar valores positivos
-Usuário único
 Devem ser armazenados em uma variável e exibidos no extrato
 
 2 - Saque:
