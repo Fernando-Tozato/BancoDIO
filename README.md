@@ -11,14 +11,8 @@ Sistema bancário simples, desenvolvido como exercício de bootcamp da DIO. A ap
 * [Execução](#execução)
 * [Endpoints](#endpoints)
 * [Arquitetura do Projeto](#arquitetura-do-projeto)
-
-  * [Modelos](#modelos)
-  * [Funções Auxiliares](#funções-auxiliares)
-  * [Views](#views)
-  * [URLs](#urls)
 * [Desafio](#desafio)
 * [Dependências](#dependências)
-* [Contribuição](#contribuição)
 * [Licença](#licença)
 
 ## Descrição
