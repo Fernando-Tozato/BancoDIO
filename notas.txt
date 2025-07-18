@@ -3,16 +3,46 @@ Desafio 1:
 Criar um Sistema Bancário que permita realizar as seguintes operações:
 
 1 - Depósito:
-Depositar valores positivos
-Devem ser armazenados em uma variável e exibidos no extrato
+    Depositar valores positivos
+    Devem ser armazenados em uma variável e exibidos no extrato
 
 2 - Saque:
-Limite de 500 por saque
-Limite de 3 saques diários
-Caso não tenha saldo, exibir mensagem de erro
-Devem ser armazenados em uma variável e exibidos no extrato
+    Limite de 500 por saque
+    Limite de 3 saques diários
+    Caso não tenha saldo, exibir mensagem de erro
+    Devem ser armazenados em uma variável e exibidos no extrato
 
 3 - Extrato:
-Deve listar todos os depósitos e saques realizados
-Ao final do extrato, exibir o saldo atual
-Formatação: R$ xxxx.xx
+    Deve listar todos os depósitos e saques realizados
+    Ao final do extrato, exibir o saldo atual
+    Formatação: R$ xxxx.xx
+
+
+Desafio 2:
+
+Otimizar o sistema bancário.
+
+1 - Depósito:
+    Retornar saldo
+
+2 - Saque:
+    Retornar saldo
+
+3 - Extrato:
+
+4 - Criar cliente:
+    Permitir criar um cliente os dados:
+        nome
+        data de nascimento
+        cpf (apenas números)
+        endereço
+            logradouro, número - bairro - cidade/estado
+    Armazenar os dados do cliente
+
+5 - Criar conta:
+    Permitir criar uma conta com os dados:
+        número da conta
+        agência (0001)
+        saldo
+        cliente
+    Armazenar os dados da conta

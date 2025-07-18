@@ -1,12 +1,39 @@
 from django.db import models
 from django.db.models import enums
 
-class Account(models.Model):
-    account_number = models.CharField(max_length=20, unique=True, verbose_name="Account Number")
-    balance = models.DecimalField(decimal_places=2, max_digits=10, default=0.00, verbose_name="Balance")
+
+class Client(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Client Name")
+    birth_date = models.DateField(verbose_name="Birth Date")
+    cpf = models.CharField(max_length=11, unique=True, verbose_name="CPF")
+    street_address = models.CharField(max_length=255, verbose_name="Street Address")
+    street_number = models.CharField(max_length=10, verbose_name="Street Number")
+    neighborhood = models.CharField(max_length=100, verbose_name="Neighborhood")
+    city = models.CharField(max_length=100, verbose_name="City")
+    state_code = models.CharField(max_length=2, verbose_name="State Code")
+
+    def formatted_address(self):
+        return f"{self.street_address}, {self.street_number} - {self.neighborhood} - {self.city}/{self.state_code}"
+
+    def formatted_cpf(self):
+        return f"{self.cpf[:3]}.{self.cpf[3:6]}.{self.cpf[6:9]}-{self.cpf[9:]}"
 
     def __str__(self):
-        return f"Account {self.account_number} - Balance: {self.balance}"
+        return f"{self.name} - {self.formatted_cpf()}"
+
+    class Meta:
+        verbose_name = "Client"
+        verbose_name_plural = "Clients"
+
+class Account(models.Model):
+    account_number = models.CharField(max_length=20, unique=True, verbose_name="Account Number")
+    agency_number = models.CharField(max_length=10, verbose_name="Agency Number", default='0001')
+    balance = models.DecimalField(decimal_places=2, max_digits=10, default=0.00, verbose_name="Balance")
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='accounts', verbose_name="Client")
+    is_active = models.BooleanField(default=True, verbose_name="Is Active")
+
+    def __str__(self):
+        return f"{self.agency_number} - {self.account_number}"
 
     class Meta:
         verbose_name = "Account"
@@ -32,7 +59,7 @@ class Operation(models.Model):
     to_account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='transfer_to', verbose_name="To Account", null=True, blank=True)
 
     def __str__(self):
-        return f"{self.timestamp.strftime('%d/%m/%Y %H:%M:%S')} - {self.get_type_display()} - {self.get_way_display()} - {self.amount}"
+        return f"{self.get_type_display()} - {self.timestamp.strftime('%Y-%m-%d - %H:%M:%S')}"
 
     def save(self, **kwargs):
         if self.type == OperationsType.DEPOSIT:
